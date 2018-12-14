@@ -10,7 +10,7 @@ l_x_anio = defaultdict(int)
 for linea in a:
 	vale = ":" in linea
 	for e in ["changed", "Bonifacio 1590", "Messages to", "9 11 3152", "added", "created", "left"]:
-		vale = vale and (e in linea)
+		vale = vale and (e not in linea)
 	if vale:
 		try :
 			persona = linea.split(":")[1].split("- ")[1]
