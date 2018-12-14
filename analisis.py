@@ -19,9 +19,10 @@ for linea in a:
 			l_x_anio[mes+"-"+anio] += 1
 			lineas_x_persona[persona].append(linea.split(":")[2])
 			linea = linea.lower()
-			esDroga = False
+			es_droga = False
 			for p in ["maria","droguita","cogo","falopa","cocuchi","merca","lsd","pepa","peponia","movida","flor","droga","cannabis","porro","porrito","marihuana","faso"]:
-				esDroga = esDroga or (p in linea)
+				es_droga = es_droga or (p in linea)
+			droga[persona] += es_droga
 		except :
 			pass
 
