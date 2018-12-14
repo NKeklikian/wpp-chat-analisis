@@ -8,12 +8,9 @@ lineas_x_persona = defaultdict(list)
 l_x_anio = defaultdict(int)
 
 for linea in a:
-	vale = True
-	if ":" not in linea:
-		vale = False
+	vale = ":" in linea
 	for e in ["changed", "Bonifacio 1590", "Messages to", "9 11 3152", "added", "created", "left"]:
-		if e in linea:
-			vale = False
+		vale = vale and (e in linea)
 	if vale:
 		try :
 			persona = linea.split(":")[1].split("- ")[1]
@@ -22,8 +19,9 @@ for linea in a:
 			l_x_anio[mes+"-"+anio] += 1
 			lineas_x_persona[persona].append(linea.split(":")[2])
 			linea = linea.lower()
-			if "cogo" in linea or "falopa" in linea or "cocuchi" in linea or "merca" in linea or "lsd" in linea or "pepa" in linea or "peponia" in linea or "movida" in linea or "flor" in linea or "droga" in linea or "cannabis" in linea or "porro" in linea or "porrito" in linea or "faso" in linea or "marihuana" in linea or "maria" in linea or "droguita" in linea:
-				droga[persona] += 1
+			esDroga = False
+			for p in ["maria","droguita","cogo","falopa","cocuchi","merca","lsd","pepa","peponia","movida","flor","droga","cannabis","porro","porrito","marihuana","faso"]:
+				esDroga = esDroga or (p in linea)
 		except :
 			pass
 
@@ -78,7 +76,7 @@ for i, j in cant_x_pers:
 	saltear = ["que","de","la","a","el","no","en","y","un","es","se","Yo","yo","una","con","Y","los","si","No"
 	,"por","con","para","Jajaja","pero","como","estoy","Si","El","hay","mi","esta",
 	"te","le","o","Pero","las","lo","mas","Que","me","del","Jaja","Jajajajaja","tu","al",
-	"este","De","eso","La","Es","A","Me","Jajajaja","Jajajajajaja","En","Por","Para","Como",]
+	"este","De","eso","La","Es","A","Me","Jajajaja","Jajajajajaja","En","Por","Para","Como"]
 	for l in lineas_x_persona[i]:
 		for p in l.strip("\n").split():
 			if p not in saltear:
